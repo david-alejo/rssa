@@ -24,11 +24,17 @@ RUN sudo apt install -y git vim nano iputils-ping net-tools
 RUN sudo apt -y install libgl1-mesa-glx libgl1-mesa-dri && \
     rm -rf /var/lib/apt/lists/*
 
+# Multiple terminals support
+RUN apt install tmuxinator
+
 # By default the DockerFile uses the root as user. 
 # We will add a custom user so that we work in user space by default
 # And then switch to that user
 # Source: https://www.docker.com/blog/understanding-the-docker-user-instruction/
 RUN useradd -ms /bin/bash rssa
+RUN echo "rssa:asdf" | chpasswd
+RUN adduser rssa sudo & adduser rssa dialout & adduser rssa plugdev
+
 USER rssa
 
 # We will use the home directory as work directory

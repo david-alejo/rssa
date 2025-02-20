@@ -21,8 +21,7 @@ RUN sudo apt install -y ros-noetic-dynamixel-sdk \
 RUN sudo apt install -y git vim nano iputils-ping net-tools
 
 # MESA drivers for hardware acceleration graphics (Gazebo and RViz)
-RUN sudo apt -y install libgl1-mesa-glx libgl1-mesa-dri && \
-    rm -rf /var/lib/apt/lists/*
+RUN sudo apt -y install libgl1-mesa-glx libgl1-mesa-dri
 
 # Multiple terminals support (tmux)
 RUN apt install tmuxinator

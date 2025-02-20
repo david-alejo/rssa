@@ -24,7 +24,7 @@ RUN sudo apt install -y git vim nano iputils-ping net-tools
 RUN sudo apt -y install libgl1-mesa-glx libgl1-mesa-dri && \
     rm -rf /var/lib/apt/lists/*
 
-# Multiple terminals support
+# Multiple terminals support (tmux)
 RUN apt install tmuxinator
 
 # By default the DockerFile uses the root as user. 

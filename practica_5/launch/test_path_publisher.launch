@@ -1,0 +1,9 @@
+<launch>
+	<arg name="path_file" default="path"/>
+	<arg name="frame_id" default="odom"/>
+	<rosparam command="delete" param="/path" />
+	<rosparam command="load" file="$(find turtlebot_controller)/test/$(arg path_file).yaml" />
+	<node pkg="turtlebot_controller" type="path_publisher.py" name="path_publisher" output="screen">
+		<param name="frame" value="$(arg frame_id)"/>
+	</node>
+</launch>

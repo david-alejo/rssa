@@ -13,7 +13,7 @@ import tf
 from geometry_msgs.msg import Twist
 from geometry_msgs.msg import PoseStamped
 
-class Turtlebot():
+class TurtlebotController:
     def __init__(self):
        
         

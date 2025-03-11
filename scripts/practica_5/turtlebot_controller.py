@@ -21,42 +21,42 @@ class Turtlebot():
         # Tip: You may need to change cmd_vel_mux/input/navi to /cmd_vel if you're not using TurtleBot2
         self.cmd_vel = rospy.Publisher('cmd_vel/', Twist, queue_size=10)
         
-        # Exercise 1: declare a transform listener
+        # Exercise 1: declare a transform listener, and get the parameters from the ROS parameter server
         
-        # End of Exercise 1
-        
-        # Exercise 2: the goal should be received from the proper topic. Add a subscriber and implement a callback method
-        self.goal_received = False
-        self.goal = PoseStamped()
-        self.goal.pose.orientation.w = 1.0;
-        self.goal.header.frame_id = "odom"
-        self.goal.pose.position.x = 2.0
-        self.goal.pose.position.y = 2.0
-        self.goal.pose.position.z = 0.0
-        # End of exercise 2
         
         # TODO: Retrieve parameters from parameter server
         self.base_frame_id = "base_footprint"
         self.global_frame_id = "odom"
         self.v_ref = 0.5
         
+        # End of Exercise 1
+        
+        # Exercise 2: the goal should be received from the proper topic. Add a subscriber and implement a callback method
+        self.goal_received = False
+        self.goal = PoseStamped()
+        self.goal.pose.orientation.w = 1.0
+        self.goal.header.frame_id = "odom"
+        self.goal.pose.position.x = 2.0
+        self.goal.pose.position.y = 2.0
+        self.goal.pose.position.z = 0.0
+        # End of exercise 2
+        
     def control_loop(self):
         rospy.loginfo("Turtlebot Controller: Control Loop")
         
-        # TODO: Exercise 1: get the current pose of the robot in odom coordinates and print it
-
-        
-        # End of exercise 1
-
         linear = 0.0
         angular = 0.0
 
-        # TODO: Exercise 2a: Transform the goal to the local frame and implement the control loop
+        # TODO: Exercise 1a: Transform the goal to the local frame and implement the control loop
         base_goal = PoseStamped()
             
-        # TODO: Exercise 2b. Put the control law here (from the value of base_goal get the linear and angular velocity commands)
+        # TODO: Exercise 2. Put the control law here (from the value of base_goal get the linear and angular velocity commands)
+        
+        # TODO: Exercise 2a. Use a proportional control to calculate the angular velocity command from the angular error
             
-        # TODO: implement the trapezoidal profile
+        # TODO: Exercise 2b. calculate the linear velocity command with trapezoidal profile (first you could try constant velocity)
+        
+        # TODO: Exercise 2c. Stop when the robot is close enough to the goal
         
         # End of Exercise 2a - 2b
     
@@ -80,19 +80,19 @@ class Turtlebot():
         rospy.sleep(1)
  
 if __name__ == '__main__':
-    #try:
+    try:
 	 # initiliaze
         rospy.init_node('turtlebot_controller', anonymous=False)
 
 	    # tell user how to stop TurtleBot
-        rospy.loginfo("To stop TurtleBot CTRL + C")
+        rospy.loginfo("Initializing Turtlebot Controller. Please press CTRL + C to stop TurtleBot ")
 
         robot=Turtlebot()
 	    # What function to call when you ctrl + c    
         rospy.on_shutdown(robot.shutdown)
 
 	    #TurtleBot will stop if we don't keep telling it to move.  How often should we tell it to move? 10 HZ
-        r = rospy.Rate(10);
+        r = rospy.Rate(10)
 
 	    # as long as you haven't ctrl + c keeping doing...
         while not rospy.is_shutdown():
@@ -102,5 +102,5 @@ if __name__ == '__main__':
             # wait for 0.1 seconds (10 HZ) and publish again
             r.sleep()
 
-    #except:
-        #rospy.loginfo("robotcontrol node terminated.")
+    except:
+        rospy.loginfo("robotcontrol node terminated.")

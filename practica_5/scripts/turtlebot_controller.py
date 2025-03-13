@@ -18,7 +18,7 @@ class TurtlebotController:
        
         
 	# Create a publisher which can "talk" to TurtleBot and tell it to move
-        # Tip: You may need to change cmd_vel_mux/input/navi to /cmd_vel if you're not using TurtleBot2
+        # Tip: You may need to change /cmd_vel topic if you're not using TurtleBot
         self.cmd_vel = rospy.Publisher('cmd_vel/', Twist, queue_size=10)
         
         # Exercise 1: declare a transform listener, and get the parameters from the ROS parameter server
@@ -87,7 +87,7 @@ if __name__ == '__main__':
 	    # tell user how to stop TurtleBot
         rospy.loginfo("Initializing Turtlebot Controller. Please press CTRL + C to stop TurtleBot ")
 
-        robot=Turtlebot()
+        robot=TurtlebotController()
 	    # What function to call when you ctrl + c    
         rospy.on_shutdown(robot.shutdown)
 

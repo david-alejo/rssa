@@ -19,7 +19,7 @@ class TurtlebotController:
         
 	# Create a publisher which can "talk" to TurtleBot and tell it to move
         # Tip: You may need to change /cmd_vel topic if you're not using TurtleBot
-        self.cmd_vel = rospy.Publisher('cmd_vel/', Twist, queue_size=10)
+        self.cmd_vel_pub = rospy.Publisher('cmd_vel/', Twist, queue_size=10)
         
         # Exercise 1: declare a transform listener, and get the parameters from the ROS parameter server
         
@@ -68,8 +68,8 @@ class TurtlebotController:
 	    # Copy the forward velocity
         move_cmd.linear.x = lin_vel
 	    # Copy the angular velocity
-        # move_cmd.angular.z = ang_vel
-        self.cmd_vel.publish(move_cmd)
+        move_cmd.angular.z = ang_vel
+        self.cmd_vel_pub.publish(move_cmd)
         
     def shutdown(self):
         # stop turtlebot
@@ -103,4 +103,4 @@ if __name__ == '__main__':
             r.sleep()
 
     except:
-        rospy.loginfo("robotcontrol node terminated.")
+        rospy.loginfo("Turtlebot_controller node terminated.")

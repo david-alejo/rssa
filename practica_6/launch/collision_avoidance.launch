@@ -1,0 +1,27 @@
+<launch>
+	<arg name="frame_id" default="map"/>
+    <arg name="map" default="house"/>
+    <arg name="map_file" default="$(find collision_avoidance)/maps/$(arg map).yaml"/>
+	
+    <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_house.launch"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+    <node pkg="rviz" name="rviz" type="rviz" args="-d $(find collision_avoidance)/cfg/practica_6.rviz"/>
+
+    <node pkg="turtlebot_controller" type="turtlebot_controller.py" name="path_tracker" output="screen">
+		<param name="frame_id" value="$(arg frame_id)"/>
+	</node>
+
+    <!--Start the map server -->
+ 	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)"/>
+	
+	<!--Start the Montecarlo Localization module-->
+    <arg name="init_x_mcl" default ="-3" />
+    <arg name="init_y_mcl" default ="1"/>
+    <arg name="init_a_mcl" default ="0"/>
+	<node pkg="amcl" type="amcl" name="amcl" args="scan:=/scan">
+		<param name="initial_pose_x" value="$(arg init_x_mcl)" /> 
+        <param name="initial_pose_y" value="$(arg init_y_mcl)" />
+		<param name="initial_pose_a" value="$(arg init_a_mcl)" />
+	</node>
+</launch>

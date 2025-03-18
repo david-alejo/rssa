@@ -10,7 +10,7 @@
 
     <node pkg="turtlebot_controller" type="turtlebot_controller.py" name="path_tracker" output="screen">
 		<param name="frame_id" value="$(arg frame_id)"/>
-        <!-- <remap from="/cmd_vel" to="/v_pref"/>  UNCOMMENT IT WHEN INCLUDING YOUR COLLISION AVOIDANCE NODE-->
+        <!-- <remap from="cmd_vel" to="v_pref"/>  UNCOMMENT IT WHEN INCLUDING YOUR COLLISION AVOIDANCE NODE-->
 	</node>
 
     <!--Start the map server -->
@@ -25,4 +25,6 @@
         <param name="initial_pose_y" value="$(arg init_y_mcl)" />
 		<param name="initial_pose_a" value="$(arg init_a_mcl)" />
 	</node>
+
+    <!-- TODO: Add the emergency stop or collision avoidance node -->
 </launch>

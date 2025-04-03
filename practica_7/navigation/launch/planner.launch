@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="launch_practica6" default="true"/>
+
+  <node name="planner" pkg="navigation" type="path_planner_node.py" output="screen">
+    <remap from="/goal" to="/move_base_simple/goal"/>
+  </node>
+
+  <node pkg="rviz" name="rviz" type="rviz" args="-d $(find navigation)/cfg/practica_7.rviz" />
+
+  <!-- If needed, run practica 6 -->
+  <include file="$(find collision_avoidance)/launch/practica_6.launch" if="$(arg launch_practica6)">
+    <arg name="rviz" value="false"/>
+  </include>
+
+  <!--global costmap 2d for path planning-->
+    <node pkg="costmap_2d" type="costmap_2d_node" name="costmap_2d" output="screen">
+        <rosparam command="load" file="$(find navigation)/cfg/global_costmap_params.yaml" />
+    </node>
+
+</launch>
+

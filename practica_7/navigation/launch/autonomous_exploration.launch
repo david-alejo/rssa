@@ -1,11 +1,5 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="launch_practica6" default="true"/>
-
-  <node name="planner" pkg="navigation" type="path_planner_node.py" output="screen">
-    <remap from="/goal" to="/move_base_simple/goal"/>
-  </node>
-
   <node pkg="rviz" name="rviz" type="rviz" args="-d $(find navigation)/cfg/exploration.rviz" />
 
   <!-- Run turtlebot house simulation with robot state publisher -->

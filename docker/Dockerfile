@@ -11,7 +11,7 @@ RUN sudo apt update && apt install -y ros-noetic-joy ros-noetic-teleop-twist-joy
     ros-noetic-move-base ros-noetic-urdf ros-noetic-xacro \
     ros-noetic-compressed-image-transport ros-noetic-rqt* ros-noetic-rviz \
     ros-noetic-gmapping ros-noetic-navigation ros-noetic-interactive-markers \
-    ros-noetic-vision-msgs
+    ros-noetic-vision-msgs ros-noetic-urg-node ros-noetic-rplidar-ros
 
 # ROS packages for Turtlebot3 robot     
 RUN sudo apt install -y ros-noetic-dynamixel-sdk \
@@ -33,7 +33,8 @@ RUN apt install -y tmuxinator
 RUN useradd -ms /bin/bash rssa
 # Sometimes it is good to add a password so that we can use sudo to install things
 # To this end, uncomment the following line, remove extra ### and change the password 
-# RUN echo "rssa:put_some_weird_passsword!!!" | ch####pas##swd  Remove #### to change the password
+RUN echo "rssa:rssa" | chpasswd 
+### Remove #### to change the password
 RUN adduser rssa sudo & adduser rssa dialout & adduser rssa plugdev
 
 USER rssa

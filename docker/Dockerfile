@@ -36,6 +36,7 @@ RUN useradd -ms /bin/bash rssa
 RUN echo "rssa:rssa" | chpasswd 
 ### Remove #### to change the password
 RUN adduser rssa sudo & adduser rssa dialout & adduser rssa plugdev
+RUN apt -y install usbutils  
 
 USER rssa
 

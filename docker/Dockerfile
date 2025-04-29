@@ -36,7 +36,7 @@ RUN useradd -ms /bin/bash rssa
 RUN echo "rssa:rssa" | chpasswd 
 ### Remove #### to change the password
 RUN adduser rssa sudo & adduser rssa dialout & adduser rssa plugdev
-RUN usermod -aG rssa dialout && usermod -aG rssa dialout  && usermod -aG rssa sudo
+RUN usermod -aG dialout rssa  && usermod -aG plugdev rssa  && usermod -aG sudo rssa 
 
 # For the real robots. Please see how to share USB from windows via usbipd 
 RUN apt -y install usbutils udev

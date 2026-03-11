@@ -56,7 +56,11 @@ RUN usermod -aG dialout rssa  && usermod -aG plugdev rssa  && usermod -aG sudo r
 RUN apt -y install usbutils udev
 
 RUN apt install -y ros-jazzy-turtlebot3-msgs ros-jazzy-turtlebot3 \
-    ros-jazzy-turtlebot3-simulations ros-jazzy-turtlebot3-navigation2 ros-jazzy-turtlebot3-teleop
+    ros-jazzy-turtlebot3-simulations ros-jazzy-turtlebot3-navigation2 ros-jazzy-turtlebot3-teleop 
+    
+# Test the GUI
+
+RUN apt install -y x11-apps mesa-utils
 
 USER rssa
 

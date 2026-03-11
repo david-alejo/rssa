@@ -3,6 +3,8 @@ docker run -it `
 --name rssa `
 --net=host `
 --privileged `
+--volume "/tmp/.X11-unix/:/tmp/.X11-unix/" `
+--volume="$HOME/.Xauthority:/root/.Xauthority:rw" `
 --mount type=bind,source=$HOME\rssa_shared,target=/home/rssa `
 rssa `
 bash

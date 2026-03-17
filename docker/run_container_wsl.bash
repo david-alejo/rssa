@@ -14,3 +14,5 @@ docker run -it \
     --mount type=bind,source=$HOME/rssa_shared,target=/home/rssa \
     rssa \
     bash
+
+docker rm rssa

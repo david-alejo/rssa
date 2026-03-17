@@ -60,7 +60,7 @@ RUN apt install -y ros-jazzy-turtlebot3-msgs ros-jazzy-turtlebot3 \
     
 # Test the GUI
 
-RUN apt install -y x11-apps mesa-utils
+RUN apt update && apt install -y x11-apps mesa-utils
 
 USER rssa
 

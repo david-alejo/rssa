@@ -3,8 +3,6 @@
 # A very basic Emergency Stop script
 
 import math
-
-import py
 import rclpy
 import tf2_ros
 from rclpy.node import Node
@@ -27,7 +25,7 @@ class EmergencyStop(Node):
         self.min_d = 0.25
         self.emergency_stop = True
         
-        print("Emergency stop node initialized.")
+        self.get_logger().info("Emergency stop node initialized.")
         
     def control_loop(self):
         if self.v_pref is None:
@@ -35,14 +33,13 @@ class EmergencyStop(Node):
             return
         
         ### TODO: implement the control loop. Hint: if emergency stop is active, set the linear velocity to 0, but not the angular velocity (so that the robot can rotate to avoid the obstacle)
-        if self.emergency_stop:
-            print("Stopping the robot")
-        print("Publishing velocity command: linear.x = %.2f, angular.z = %.2f".format(self.v_pref.twist.linear.x, self.v_pref.twist.angular.z))
+        
+        
+        #End of task
+        
+        self.get_logger().info("Publishing velocity command: linear.x = {self.v_pref.twist.linear.x}, angular.z = {self.v_pref.twist.angular.z}")
         self.cmd_vel_pub.publish(self.v_pref)
         ## End of task
-        
-        print("Published")
-
 
     def vPrefCallback(self, msg):
         # Hint: If no path is received it is set to None in the constructor (path received) 
@@ -57,16 +54,15 @@ class EmergencyStop(Node):
         # And also reset the current wp counter (you can set it to the closest point to the robot)
         self.emergency_stop = False
         
-        print("Here")
-        
         angle = msg.angle_min
         for distance in msg.ranges:
             #### Move to range -PI, PI
             if angle > math.pi:
                 angle -= 2*math.pi
             
-            # TODO: see if the ranges of interest are in the front of the robot, and if any of them is below the threshold, activate the emergency stop 
-             
+            # TODO: see if the ranges of interest are in the front of the robot
+            # and if any of them is below the threshold, activate the emergency stop 
+            
             ## End of task
             
             angle+=msg.angle_increment

@@ -10,13 +10,13 @@
         <param name="use_sim_time" value="true"/>
     </node>
 
-    <node pkg="turtlebot_controller" exec="turtlebot_controller" name="path_tracker">
-		<param name="frame_id" value="$(var frame_id)"/>
+    <node pkg="turtlebot_controller" exec="path_tracker" name="path_tracker">
+		<param name="global_frame_id" value="$(var frame_id)"/>
         <remap from="cmd_vel" to="v_pref"/>
 	</node>
 
     <!--Start the map server -->
- 	<node name="map_server" pkg="nav2_map_server" exec="map_server"    output="log">
+ 	<node name="map_server" pkg="nav2_map_server" exec="map_server" output="log">
         <param name="yaml_filename" value="$(var map_file)" />
         <param name="use_sim_time" value="true" />
         <param name="topic_name" value="map" />
@@ -29,19 +29,24 @@
         <param name="initial_pose.x" value="-2.2"/>
         <param name="initial_pose.y" value="-0.5"/>
         <param name="initial_pose.a" value="0.0"/>
-    </node> 
+    </node> s
 
     <!-- 2. Lifecycle Manager para activar AMCL y map server-->
     <node pkg="nav2_lifecycle_manager" exec="lifecycle_manager" name="lifecycle_manager_localization">
         <param name="autostart" value="true"/>
         <param name="use_sim_time" value="true" />
-        <param name="node_names" value="['map_server','amcl']"/>
+        <param name="node_names" value="['map_server','amcl', 'costmap_server']"/>
     </node>
+
 
 
     <!-- Start the collision avoidance node (can change depending on the method)-->
     
-    <node pkg="collision_avoidance" name="collision_avoidance" exec="emergency_stop" output="screen" >
+    <!-- <node pkg="collision_avoidance" name="collision_avoidance" exec="emergency_stop" output="screen" /> -->
+    <node pkg="collision_avoidance" name="collision_avoidance" exec="DWA" output="screen" >
         <param name="use_sim_time" value="true" />
+        <param name="alpha" value="10.0"/>
+        <param name="beta" value="3.5"/>
+        <param name="min_d" value="0.18"/>
     </node>
 </launch>

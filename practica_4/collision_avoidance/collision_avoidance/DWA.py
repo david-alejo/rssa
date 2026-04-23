@@ -180,10 +180,9 @@ class DWA(Node):
             if angle > math.pi:
                 angle -= 2*math.pi
             
-            # TODO: update the obstacles attribute of the class with each obstacle
-            if i%2 == 0 and angle > -math.pi*0.5 and angle < math.pi *0.5 and r < 2.0:
-                self.obstacles.append((r * math.cos(angle), r * math.sin(angle)))
-
+            # TODO: update the obstacles attribute of the class with each obstacle within the area of interest (for example, within a certain distance from the robot, and within a certain angle range in front of the robot).
+            # Hint: you can convert the polar coordinates (r, angle) to Cartesian coordinates (x, y) using the formulas: x = r * cos(angle), y = r * sin(angle).
+            
             ## End of task
             angle += msg.angle_increment
             i += 1

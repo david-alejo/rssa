@@ -134,7 +134,10 @@ class DWA(Node):
         #Sugerencia: representar las trayectorias usando Markers.
         # ver: https://docs.ros.org/en/jazzy/Tutorials/Intermediate/RViz/Marker-Display-types/Marker-Display-types.html
 
-        # TODO: Evaluacion: dos criterios: w mas cercano y mayor distancia a los obstáculos. Se pueden ponderar ambos criterios con un peso alpha  
+        # TODO: Evaluacion: tres criterios: 
+        # w mas cercano, v mas cerano
+        # mayor mínima distancia a los obstáculos.
+        #  Se pueden dos de ellos con dos pesos: alpha y beta  
         score = -10000.0
 
         return score
@@ -161,7 +164,7 @@ class DWA(Node):
         # para intentar salir de la situación de bloqueo. 
         # Implementar alguna de estas estrategias para evitar que el robot se quede bloqueado sin moverse.
         if max_score < -1000.0:
-            best = (0.0, 0.2)
+            best = (0.0, 0.2) # Probablemente según donde esté el obstáculo, lo mejor sea girar al otro lado. Probar diferentes estrategias.
 
         return best
 

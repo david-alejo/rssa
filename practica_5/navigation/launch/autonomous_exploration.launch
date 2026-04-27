@@ -4,8 +4,7 @@
 
   <!-- Run turtlebot house simulation with robot state publisher -->
   <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_house.launch"/>
-  <node name="rsp" pkg="robot_state_publisher" type="robot_state_publisher"/>
-
+  
   <!-- Launch SLAM algorithm: gmapping-->
   <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping"/>
 

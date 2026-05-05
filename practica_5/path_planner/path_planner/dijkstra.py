@@ -6,7 +6,7 @@ import math
 from nav_msgs.msg import OccupancyGrid
 
 
-class Planner:
+class Dijkstra:
     ####### Class that represents a node ######
     class Node:
         def __init__(self, cx, cy, cost, parent):
@@ -23,7 +23,7 @@ class Planner:
             self.parent = parent  # index of the previous Node
             
     ###### Methods of Planner class ####
-    def __init__(self, costmap):
+    def __init__(self, costmap, min_value = 70):
         """ 
         Initialize a map from a ROS costmap
         
@@ -52,7 +52,7 @@ class Planner:
                              for _ in range(self.x_width)]
         obstacles = 0
         for value in costmap.data:
-            if value > 80:  # This value could change depending on the map
+            if value > min_value:  # This value could change depending on the map
                 obstacles += 1
                 self.obstacle_map[x][y] = True
             # Update the iterators

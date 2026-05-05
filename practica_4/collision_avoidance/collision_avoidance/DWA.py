@@ -60,9 +60,6 @@ class DWA(Node):
         if self.v_pref is None:
             self.get_logger().debug("No velocity command received yet.")
             return
-        
-        ### TODO: call the DWA method for obtaining the optimal velocity (calling steps 2, 3 and 4)
-        
 
         vx = self.v_pref.twist.linear.x
         wz = self.v_pref.twist.angular.z
@@ -127,14 +124,14 @@ class DWA(Node):
 
             traj.append((x,y,theta))
 
-            # TODO: Comprobar contra los obstáculos (Mucho más rápido)
+            # TODO 2a: Comprobar contra los obstáculos (Mucho más rápido)
             # Para levantar la bandera choca y calcular la distancia al obstáculo más cercano (min_dist)
             
 
         #Sugerencia: representar las trayectorias usando Markers.
         # ver: https://docs.ros.org/en/jazzy/Tutorials/Intermediate/RViz/Marker-Display-types/Marker-Display-types.html
 
-        # TODO: Evaluacion: tres criterios: 
+        # TODO 2b: Evaluacion: tres criterios: 
         # w mas cercano, v mas cerano
         # mayor mínima distancia a los obstáculos.
         #  Se pueden dos de ellos con dos pesos: alpha y beta  
@@ -155,11 +152,11 @@ class DWA(Node):
 
         best = test_set[0]
 
-        #TODO: iterar sobre el conjunto de velocidades a probar, evaluar cada una de las trayectorias simuladas y quedarnos con la mejor (la que tenga mayor puntuación)
+        #TODO 3a: iterar sobre el conjunto de velocidades a probar, evaluar cada una de las trayectorias simuladas y quedarnos con la mejor (la que tenga mayor puntuación)
         
 
 
-        # TODO: ¿Qué pasa si no hay ninguna trayectoria segura? (puntuación muy baja) 
+        # TODO 3b: (opcional) ¿Qué pasa si no hay ninguna trayectoria segura? (puntuación muy baja) 
         # Deberíamos parar el robot, o ir a la velocidad más baja posible (0.05 m/s), o girar aleatoriamente
         # para intentar salir de la situación de bloqueo. 
         # Implementar alguna de estas estrategias para evitar que el robot se quede bloqueado sin moverse.
@@ -180,7 +177,7 @@ class DWA(Node):
             if angle > math.pi:
                 angle -= 2*math.pi
             
-            # TODO: update the obstacles attribute of the class with each obstacle within the area of interest (for example, within a certain distance from the robot, and within a certain angle range in front of the robot).
+            # TODO 1: update the obstacles attribute of the class with each obstacle within the area of interest (for example, within a certain distance from the robot, and within a certain angle range in front of the robot).
             # Hint: you can convert the polar coordinates (r, angle) to Cartesian coordinates (x, y) using the formulas: x = r * cos(angle), y = r * sin(angle).
             
             ## End of task

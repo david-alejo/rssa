@@ -1,0 +1,19 @@
+<launch>
+    <include file="$(find-pkg-share collision_avoidance)/launch/practica_4.launch.xml" >
+        <arg name="rviz" value="false"/>
+    </include>
+
+    <node pkg="rviz2" name="rviz" exec="rviz2" args="-d $(find-pkg-share path_planner)/cfg/practica_5.rviz" output="log">
+        <param name="use_sim_time" value="true"/>
+    </node>
+
+    <node pkg="path_planner" name="path_planner" exec="path_planner" output="screen" >
+        <param name="use_sim_time" value="true" />
+    </node>
+
+    <node pkg="nav2_costmap_2d" exec="nav2_costmap_2d" name="costmap_server" >
+        <param name="use_sim_time" value="true" />
+        <param from="$(find-pkg-share path_planner)/cfg/global_costmap_params.yaml" />
+    </node>
+
+</launch>

@@ -1,9 +1,9 @@
 <launch>
 	<arg name="path_file" default="path"/>
 	<arg name="frame_id" default="odom"/>
-	<rosparam command="delete" param="/path" />
-	<rosparam command="load" file="$(find turtlebot_controller)/test/$(arg path_file).yaml" />
-	<node pkg="turtlebot_controller" executable="path_publisher" name="path_publisher" output="screen">
-		<param name="frame" value="$(arg frame_id)"/>
+
+	<node pkg="turtlebot_controller" exec="path_publisher" name="path_publisher" output="screen">
+		<param name="frame" value="$(var frame_id)"/>
+		<param name="path_file" value="$(env HOME)/rssa_ws/src/turtlebot_controller/test/$(var path_file).yaml"/>
 	</node>
 </launch>
